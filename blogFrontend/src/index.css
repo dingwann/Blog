@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    .iconsize {
+        @apply block border-solid border-2 rounded-[8px] border-inherit
+    }
+
+    .iconComponent {
+        @apply m-[1px] h-[32px] w-[32px]
+    }
+
+}
