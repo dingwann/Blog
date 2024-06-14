@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { User } = require('../models/Database')
 const jwt = require('jsonwebtoken')
-import secret from '../secretkey'
+const secret = require('../secretkey')
 
 /* 注册请求 */
 router.post('/reg', function (req, res, next) {

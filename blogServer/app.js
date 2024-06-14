@@ -6,7 +6,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const { expressjwt: jwt } = require("express-jwt")
 const uploadRouter = require('./routes/upload')
-import secret from './secretkey'
+const secret = require('./secretkey')
 
 // 路由接口
 const usersRouter = require('./routes/users');
