@@ -38,7 +38,7 @@ export default function Friend(props) {
 
         try {
             const response = await http.post('/api/friendlink', { title, url, desc, siteImgUrl });
-            console.log(response);
+
             if (response.data.code === 1) {
                 toast('🦄 提交成功!', {
                     position: "top-center",
@@ -51,9 +51,9 @@ export default function Friend(props) {
                     progress: undefined,
                 });
                 // 成功后延时刷新 FriendComment 组件
-                setTimeout(() => {
-                    setRefreshKey(prevKey => prevKey + 1);
-                }, 1000)
+
+                setRefreshKey(prevKey => prevKey + 1);
+
             } else {
                 toast(`😢 code:${response.data.err.code}(${Object.keys(response.data.err.keyValue)})  提交失败！`, {
                     position: "top-center",

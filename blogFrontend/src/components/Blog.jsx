@@ -27,7 +27,6 @@ export default function Blog(props) {
     useLayoutEffect(() => {
         async function fetchData() {
             const res = await http.get(`/api/articles/getarticlelist`)
-            console.log(res);
 
             if (res.data.code === 1) {
 

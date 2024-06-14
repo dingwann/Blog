@@ -58,9 +58,9 @@ export default function AboutFoot(props) {
                 setContent("")
 
                 // 成功后延时刷新 FriendComment 组件
-                setTimeout(() => {
-                    props.setRefreshKey(prevKey => prevKey + 1);
-                }, 600)
+
+                props.setRefreshKey(prevKey => prevKey + 1);
+
             } else {
                 toast(`😢 code:${response.data.err.code}(${Object.keys(response.data.err.keyValue)})  提交失败！`, {
                     position: "top-center",
