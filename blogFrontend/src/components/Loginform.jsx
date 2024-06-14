@@ -34,6 +34,8 @@ export default function LoginForm(props) {
                     props.close();
                     setLoginState(true);
                 }, 2000);
+            } else {
+                setMessage('😥 登录失败! 请检查用户名和密码后重试.');
             }
         } catch (error) {
             setMessage('Login failed. Please try again.');

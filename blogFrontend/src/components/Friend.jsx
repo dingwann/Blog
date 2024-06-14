@@ -106,7 +106,7 @@ export default function Friend(props) {
                             <div className="z-2 mt-2 grid grid-cols-1 gap-4 w-full lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 xl:grid-cols-3">
                                 <a target="_blank" className="border-1 rounded-lg ring-inset ring-2 ring-[rgba(0,0,0,0)] hover:ring-violet-400 transition-transform-colors hover:shadow-sm p-2 flex items-center gap-2 backdrop-blur-sm overflow-hidden cursor-pointer">
                                     <span className="w-16 h-16">
-                                        <img className="rounded-full" src="http://localhost:3000/images/logo/logo.png" alt="headimg" />
+                                        <img className="rounded-full" src="http://113.45.148.40/:3000/images/logo/logo.png" alt="headimg" />
                                     </span>
                                     <span className="flex flex-col">
                                         <span className="text-inherit text-xl font-medium">
