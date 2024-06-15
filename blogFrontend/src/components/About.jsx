@@ -22,25 +22,52 @@ export default function About(props) {
     }, [])
 
     function Copy(c) {
-        navigator.clipboard.writeText(c)
-        toast('✅ Copy成功', {
-            position: "bottom-right",
-            autoClose: 2500,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: themestate ? "light" : "dark",
-            progress: undefined,
-        });
+
+        if (navigator.clipboard && window.isSecureContext) {
+            // navigator clipboard 向剪贴板写文本
+            toast('✅ Copy成功', {
+                position: "bottom-right",
+                autoClose: 2500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: themestate ? "light" : "dark",
+                progress: undefined,
+            });
+            return navigator.clipboard.writeText(c)
+        } else {
+            // 创建text area
+            const textArea = document.createElement('textarea')
+            textArea.value = c
+            // 使text area不在viewport，同时设置不可见
+            document.body.appendChild(textArea)
+            textArea.focus()
+            textArea.select()
+            toast('✅ Copy成功', {
+                position: "bottom-right",
+                autoClose: 2500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: themestate ? "light" : "dark",
+                progress: undefined,
+            });
+            return new Promise((res, rej) => {
+                // 执行复制命令并移除文本框
+                document.execCommand('copy') ? res() : rej()
+                textArea.remove()
+            })
+        }
     }
 
 
     return (
         <>
             <div className="px-4 w-full relative">
-                <Login></Login>
                 <ToastContainer limit={4} />
+                <Login></Login>
                 <div className="animate-fade-up pt-4 text-center flex flex-col items-center px-[8px] md:px-[56px] lg:pt-5 md:pt-6 sm:pt-6 xl:pt-16">
                     <div className="w-full lg:w-[80%] md:w-full sm:w-full xl:max-w-[1000px] xl:w-[80%]">
                         <div className="text-left flex flex-col">
