@@ -15,7 +15,7 @@ export default function Body(props) {
 
     return (
         <>
-            <div className='relative w-auto h-[100%] mt-[13.5vh] mx-[24px] max-[1023px]:mb-[16px] max-lg:space-y-6 md:mx-24 md:mt-[12vh] min-[1024px]:mx-[56px] min-[1025px]:mx-[130px] min-[1024px]:mt-[17.33vh] mb-[118px] grid grid-cols-1 lg:grid-cols-8 gap-3'>
+            <div className='relative w-auto h-[100%] mt-[13.5vh] mx-[24px] max-[1023px]:mb-[16px] max-lg:space-y-6 md:mx-24 md:mt-[12vh] min-[1024px]:mx-[56px] min-[1025px]:mx-[128px] min-[1024px]:mt-[17.33vh] mb-[118px] grid grid-cols-1 lg:grid-cols-8 gap-3'>
                 <Login></Login>
                 <GridOne></GridOne>
 

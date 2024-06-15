@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 export default function GridOne(props) {
 
     return (
-        <div className="mx-[24px] lg:col-span-5 flex flex-col justify-between space-y-2 gap-4">
+        <div className="mx-[20px] lg:col-span-5 flex flex-col justify-between space-y-2 gap-4">
 
             <div className='animate-fade-up easeinout' style={{ animationDelay: '200ms' }}>
                 <div className='flex'>
@@ -22,7 +22,7 @@ export default function GridOne(props) {
                 </p>
             </div>
 
-            <div style={{ animationDelay: '600ms' }} className='easeinout animate-fade-up pace-x-1 text-wrap font-semibold text-inherit text-[28px] md:text-[36px]'>
+            <div style={{ animationDelay: '600ms' }} className='easeinout animate-fade-up text-wrap font-semibold text-inherit text-[28px] md:text-[33px]'>
                 <Pres></Pres>
             </div>
 

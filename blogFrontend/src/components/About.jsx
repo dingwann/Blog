@@ -42,8 +42,6 @@ export default function About(props) {
             textArea.value = c
             // 使text area不在viewport，同时设置不可见
             document.body.appendChild(textArea)
-            textArea.focus()
-            textArea.select()
             toast('✅ Copy成功', {
                 position: "bottom-right",
                 autoClose: 2500,

@@ -9,7 +9,7 @@ export default function Pres(props) {
     useEffect(() => {
         const typed = new Typed(el.current, {
             strings: ['欢迎来到我的博客。',
-                '在这里记录我的成长 , 努力成为更好的自己 。 ',
+                '在这里记录我的成长 , 努力成为更好的自己 。',
                 '想当一名优秀的全栈开发者。',
                 '困时切莫间断 , 熬过此关 , 便可少进 。',
                 '再进再困 , 再熬再奋 , 自有亨通精进之日 。',
