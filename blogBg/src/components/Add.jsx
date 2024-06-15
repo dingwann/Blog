@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import Inputs from "./Input";
 import Selects from "./Select";
 import Switchs from "./Switch";
@@ -7,6 +8,8 @@ import http from './Axiosconfig'; // 引入请求接口
 import { ToastContainer, toast } from 'react-toastify';
 
 export default function Add(props) {
+    const { aid } = useParams();
+    const navigate = useNavigate();
     //文章标题
     const [artTitle, setArtTitle] = useState('');
     //文章描述
@@ -29,30 +32,54 @@ export default function Add(props) {
         checked = !checked;
     }
 
+    useEffect(() => {
+        if (aid) {
+            // Fetch the article data for editing
+            http.get(`/api/articles/getarticle/${aid}`)
+                .then(res => {
+                    console.log(res);
+                    const { title, desc, tag, content, auth, public: isPublic } = res.data.data;
+                    setArtTitle(title);
+                    setArtDesc(desc);
+                    setArtTag(tag);
+                    setArtContent(content);
+                    setArtAuthor(auth);
+                    setArtPublic(isPublic);
+                })
+                .catch(err => console.error(err));
+        }
+    }, [aid]);
+
     async function SubmitArt() {
         setLoading(true);
         try {
-            // 发送请求
-            const res = await http.post('/api/articles', {
+            const articleData = {
                 title: artTitle,
                 desc: artDesc,
                 tag: artTag,
                 content: artContent,
                 auth: artAuthor,
-                public: artPublic
-            });
-            // 返回结果
-            console.log(res);
-            if (res.data.code === 1) {
-                // 清空
-                Switch(artPublic)
-                setArtTitle('');
-                setArtTag();
-                setArtDesc('');
-                setArtContent('');
-                setArtAuthor('');
-                setShuaxin(!shuaxin); // 触发重新渲染
+                public: artPublic,
+            };
+
+            if (aid) {
+                // Update existing article
+                await http.patch(`/api/articles/${aid}`, articleData)
+                    .then(res => {
+                        console.log(res);
+                    })
+                    .catch(err => console.error(err));
+            } else {
+                // Add new article
+                await http.post('/api/articles', articleData)
+                    .then(res => {
+                        console.log(res);
+                    })
+                    .catch(err => console.error(err));
             }
+
+            navigate('/hashboard/blog'); // Redirect to blog list after submission
+
         } catch (err) {
             console.log(err);
         } finally {
@@ -68,7 +95,7 @@ export default function Add(props) {
         <>
             <div className="p-2 w-full h-auto border-l-2 border-solid rounded-md">
                 <div className="p-2 w-full">
-                    <h2>新增文章</h2>
+                    <h2>文章编辑</h2>
                     <hr className="my-2" />
                     <div className="my-2">
                         <span className="text-inherit font-medium space-y-2">

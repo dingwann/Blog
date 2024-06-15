@@ -2,13 +2,31 @@ import Inputs from "./Input"
 import Selects from "./Select"
 import { Select, Button } from "antd"
 import { SearchOutlined } from '@ant-design/icons';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
+import http from './Axiosconfig'; // 引入请求接口
+import { useEffect, useState } from "react";
+import { FormatDate2 } from "./FormatDate";
 
 export default function Blog(props) {
 
     function artShow() {
         // 改变文章公开状态
     }
+
+    const navigate = useNavigate();
+
+    // 存取文章
+    const [article, setArticle] = useState([])
+
+    useEffect(() => {
+        // 获取文章列表
+        async function getArticle() {
+            const res = await http.get(`/api/articles/getarticlelist`)
+            console.log(res);
+            setArticle(res.data.data)
+        }
+        getArticle()
+    }, [])
 
     return (
         <>
@@ -81,101 +99,53 @@ export default function Blog(props) {
 
                         <div className="h-full">
                             {/* 文章列表 */}
-                            <div className="grid grid-cols-7 gap-2 mx-2 py-1">
-                                <span className="flex items-center justify-center">
-                                    <p>忽如一夜春风来，千树万树梨花开。</p>
+                            {article.map((item, index) => (
+                                <span key={index}>
+                                    {console.log(item)}
+                                    <div className="grid grid-cols-7 gap-2 mx-2 py-1">
+                                        <span className="flex items-center justify-center">
+                                            <p>{item.title}</p>
+                                        </span>
+
+                                        <span className="flex items-center justify-center">
+                                            <p>{item.auth}</p>
+                                        </span>
+
+                                        <span className="flex justify-center items-center gap-1">
+                                            {item.tag.map((tag, index) => (
+                                                <span key={index} className="bg-black rounded-2xl text-white px-2">
+                                                    {tag}
+                                                </span>
+                                            ))}
+                                        </span>
+
+                                        <span className="flex items-center justify-center">
+                                            <input type="checkbox" className="toggle" defaultChecked={item.public} onChange={artShow} />
+                                        </span>
+
+                                        <span className="flex items-center justify-center gap-2">
+                                            <span>{FormatDate2(item.createdAt)}</span>
+                                        </span>
+
+                                        <span className="flex items-center justify-center gap-2">
+                                            <span>{FormatDate2(item.updatedAt)}</span>
+                                        </span>
+
+                                        <span className="flex items-center justify-center gap-10">
+                                            {/* 编辑 */}
+                                            <Link to={`/hashboard/edit/${item._id}`}>
+                                                <svg className="hover:cursor-pointer hover:text-gray-400" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24"><path fill="currentColor" d="M5 19h1.425L16.2 9.225L14.775 7.8L5 17.575zm-2 2v-4.25L16.2 3.575q.3-.275.663-.425t.762-.15t.775.15t.65.45L20.425 5q.3.275.438.65T21 6.4q0 .4-.137.763t-.438.662L7.25 21zM19 6.4L17.6 5zm-3.525 2.125l-.7-.725L16.2 9.225z" />
+                                                </svg></Link>
+                                            {/* 删除 */}
+                                            <svg className="hover:cursor-pointer text-red-600 hover:text-red-300" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24"><path fill="currentColor" d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z" />
+                                            </svg>
+                                        </span>
+
+                                    </div>
+                                    <hr />
                                 </span>
+                            ))}
 
-                                <span className="flex items-center justify-center">
-                                    <p>丁烷</p>
-                                </span>
-
-                                <span className="flex items-center gap-1">
-                                    <span className="bg-black rounded-2xl text-white px-2">
-                                        TypeScript
-                                    </span>
-                                    <span className="bg-black rounded-2xl text-white px-2">
-                                        React
-                                    </span>
-                                </span>
-
-                                <span className="flex items-center justify-center">
-                                    <input type="checkbox" className="toggle" defaultChecked={true} onChange={artShow} />
-                                </span>
-
-                                <span className="flex items-center justify-center gap-2">
-                                    <span>2024-1-1</span>
-                                    <span>16:00</span>
-                                </span>
-
-                                <span className="flex items-center justify-center gap-2">
-                                    <span>2024-1-1</span>
-                                    <span>16:22</span>
-                                </span>
-
-                                <span className="flex items-center justify-center gap-10">
-                                    {/* 编辑 */}
-                                    <svg className="hover:cursor-pointer hover:text-gray-400" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24"><path fill="currentColor" d="M5 19h1.425L16.2 9.225L14.775 7.8L5 17.575zm-2 2v-4.25L16.2 3.575q.3-.275.663-.425t.762-.15t.775.15t.65.45L20.425 5q.3.275.438.65T21 6.4q0 .4-.137.763t-.438.662L7.25 21zM19 6.4L17.6 5zm-3.525 2.125l-.7-.725L16.2 9.225z" />
-                                    </svg>
-                                    {/* 删除 */}
-                                    <svg className="hover:cursor-pointer text-red-600 hover:text-red-300" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24"><path fill="currentColor" d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z" />
-                                    </svg>
-                                </span>
-
-                                {/* <span className="flex items-center justify-center text-red-500 hover:cursor-pointer hover:text-red-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24"><path fill="currentColor" d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z" />
-                                </svg>
-                            </span> */}
-                            </div>
-                            <hr />
-
-                            <div className="grid grid-cols-7 gap-2 mx-2 py-1">
-                                <span className="flex items-center justify-center">
-                                    <p>忽如一夜春风来，千树万树梨花开。</p>
-                                </span>
-
-                                <span className="flex items-center justify-center">
-                                    <p>丁烷</p>
-                                </span>
-
-                                <span className="flex items-center gap-1">
-                                    <span className="bg-black rounded-2xl text-white px-2">
-                                        TypeScript
-                                    </span>
-                                    <span className="bg-black rounded-2xl text-white px-2">
-                                        React
-                                    </span>
-                                </span>
-
-                                <span className="flex items-center justify-center">
-                                    <input type="checkbox" className="toggle" defaultChecked={true} onChange={artShow} />
-                                </span>
-
-                                <span className="flex items-center justify-center gap-2">
-                                    <span>2024-1-1</span>
-                                    <span>16:00</span>
-                                </span>
-
-                                <span className="flex items-center justify-center gap-2">
-                                    <span>2024-1-1</span>
-                                    <span>16:22</span>
-                                </span>
-
-                                <span className="flex items-center justify-center gap-10">
-                                    {/* 编辑 */}
-                                    <svg className="hover:cursor-pointer hover:text-gray-400" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24"><path fill="currentColor" d="M5 19h1.425L16.2 9.225L14.775 7.8L5 17.575zm-2 2v-4.25L16.2 3.575q.3-.275.663-.425t.762-.15t.775.15t.65.45L20.425 5q.3.275.438.65T21 6.4q0 .4-.137.763t-.438.662L7.25 21zM19 6.4L17.6 5zm-3.525 2.125l-.7-.725L16.2 9.225z" />
-                                    </svg>
-                                    {/* 删除 */}
-                                    <svg className="hover:cursor-pointer text-red-600 hover:text-red-300" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24"><path fill="currentColor" d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z" />
-                                    </svg>
-                                </span>
-
-                                {/* <span className="flex items-center justify-center text-red-500 hover:cursor-pointer hover:text-red-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24"><path fill="currentColor" d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z" />
-                                </svg>
-                            </span> */}
-                            </div>
-                            <hr />
                         </div>
 
                         {/* 底部 */}

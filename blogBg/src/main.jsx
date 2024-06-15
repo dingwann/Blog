@@ -39,6 +39,10 @@ const router = createBrowserRouter([
         element: <Add></Add>
       },
       {
+        path: "edit/:aid",
+        element: <Add />, // 用于编辑文章的路由
+      },
+      {
         path: "label",
         element: <Label></Label>
       },
