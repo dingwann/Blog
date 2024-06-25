@@ -5,6 +5,7 @@ import http from './Axiosconfig'
 import { ToastContainer, toast } from 'react-toastify';
 import { Link } from "react-router-dom";
 import formatDate from "./FormatDate";
+import { Helmet } from 'react-helmet';
 
 
 export default function Blog(props) {
@@ -50,12 +51,15 @@ export default function Blog(props) {
 
     return (
         <>
+            <Helmet>
+                <title>博客 - Ding Wan</title>
+            </Helmet>
             <div className="px-4 w-full relative">
                 <Login />
                 <ToastContainer limit={3} />
                 <div id='blog' className="animate-fade-up px-[8px] md:px-[56px] pt-4 lg:mx-[12.8%] lg:pt-5 md:pt-6 sm:pt-6 xl:pt-16">
                     <h2 className="text-inherit text-5xl text-violet-400 font-bold pb-8">BLOG</h2>
-                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <ul className="grid grid-cols-1 md:grid-cols-2 md:gap-10">
                         {articleList.map((item, index) => (
                             <li key={index} className="hover:cursor-pointer">
                                 <Link to={`/blog/${item._id}`} className={`${themestate ? "flex flex-col justify-between h-full px-6 py-4 transition-colors rounded-lg bg-transparent hover:bg-gray-50" : "flex flex-col justify-between h-full px-6 py-4 transition-colors rounded-lg bg-transparent hover:bg-gray-700"}`}>

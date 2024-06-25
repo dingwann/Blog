@@ -8,9 +8,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Outlet, BrowserRouter as Router, useLocation } from "react-router-dom";
 import { LoginContext } from './components/LoginContext'
 import http from './components/Axiosconfig'
-
-
-
+import { Helmet } from 'react-helmet';
 
 
 // 组件用于统计PV和UV
@@ -32,6 +30,7 @@ const usePageTracking = () => {
 };
 
 function App() {
+
   const [show, setShow] = useState()
 
   // 存储PV、UV
@@ -69,6 +68,9 @@ function App() {
 
   return (
     <>
+      <Helmet>
+        <title> Ding Wan </title>
+      </Helmet>
       <div className="w-full h-full relative">
         <LoginProvider>
           <AsideContextWrapper>

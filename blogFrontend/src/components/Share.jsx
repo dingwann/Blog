@@ -1,5 +1,6 @@
 import { useLayoutEffect } from "react";
 import Login from "../components/Login";
+import { Helmet } from 'react-helmet';
 
 export default function Share(props) {
     useLayoutEffect(() => {
@@ -12,6 +13,9 @@ export default function Share(props) {
 
     return (
         <>
+            <Helmet>
+                <title>手记 - Ding Wan</title>
+            </Helmet>
             <div className="px-4 w-full relative">
                 <Login></Login>
                 <div className="pt-4 text-center flex flex-col items-center px-[8px] md:px-[56px] lg:pt-5 md:pt-6 sm:pt-6 xl:pt-16">
@@ -31,6 +35,8 @@ export default function Share(props) {
                         <div className="text-left">
                             <div className="z-2">
                                 Coding...
+                                {/* 导航栏 */}
+                                <span></span>
                             </div>
                         </div>
 

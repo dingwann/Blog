@@ -25,7 +25,7 @@ export default function Login(props) {
                     localStorage.setItem('uid', res.data.uid)
                     localStorage.setItem('headImgUrl', res.data.headImgUrl)
                     localStorage.setItem('token', res.data.token)
-                    window.location.replace('/hashboard/home');  // 跳转到首页
+                    window.location.replace('/admin/hashboard');  // 跳转到首页
                 }, 1000);
             }
         } catch (error) {

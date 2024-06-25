@@ -17,14 +17,14 @@ import ErrorPage from './error-page'
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/admin",
     element: <Login></Login>,
-    errorElement: <ErrorPage></ErrorPage>
-  },
-  {
-    path: "hashboard",
-    element: <App></App>,
     errorElement: <ErrorPage></ErrorPage>,
+  },
+
+  {
+    path: "/admin/hashboard",
+    element: <App></App>,
     children: [
       {
         path: "home",

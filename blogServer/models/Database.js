@@ -213,6 +213,32 @@ const MessageCommentSchema = new Schema({
 const MessageComment = mongoose.model('MessageComment', MessageCommentSchema)
 
 /* -------------------------------------------------------- */
-// 网站点赞量
+// Passlink表
+const PasslinkSchema = new Schema({
+    title: {
+        type: String,
+        required: true
+    },
+    url: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    desc: {
+        type: String,
+        required: true
+    },
+    headimg: {
+        type: String,
+        required: true
+    },
 
-module.exports = { Comment, User, Article, Message, FriendLink, FriendLinkComment, MessageComment }
+    // Pass表用User表的id关联
+    user: { type: Schema.Types.ObjectId, ref: 'User' }
+}, {
+    timestamps: true  // 记录时间，包含创建和修改
+})
+// 创建数据模型，做映射
+const Passlink = mongoose.model('Passlink', PasslinkSchema)
+
+module.exports = { Comment, User, Article, Message, FriendLink, FriendLinkComment, MessageComment, Passlink }

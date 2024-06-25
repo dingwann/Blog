@@ -87,17 +87,17 @@ export default function GridTwo(props) {
                 <span className="">目前是一名在校生，想做一名优秀的程序员。</span>
             </div>
 
-            <div className="flex self-start rounded-lg max-lg:hidden">
-                1
-            </div>
+            <span className="flex self-start rounded-lg max-lg:hidden">
 
-            <div className="flex self-start rounded-lg max-lg:hidden">
+            </span>
+
+            {/* <div className="flex self-start rounded-lg max-lg:hidden">
                 2
             </div>
 
             <div className="flex self-start rounded-lg max-lg:hidden">
                 3
-            </div>
+            </div> */}
             {/* 
             <div className="flex self-start rounded-lg max-lg:hidden">
                 111

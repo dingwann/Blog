@@ -5,12 +5,11 @@ import FriendComment from "./FriendComment";
 import http from "./Axiosconfig";
 import { LoginContext } from '../components/LoginContext';
 import { ToastContainer, toast } from 'react-toastify';
+import { Helmet } from 'react-helmet';
 
 export default function Friend(props) {
 
     // 检测是否登录
-
-
     const { themestate, LoginState } = useContext(LoginContext);
 
     // 提交表单设置
@@ -84,6 +83,9 @@ export default function Friend(props) {
 
     return (
         <>
+            <Helmet>
+                <title>友链 - Ding Wan</title>
+            </Helmet>
             <div className="px-4 w-full relative">
                 <Login></Login>
                 <ToastContainer limit={3} />
@@ -104,6 +106,20 @@ export default function Friend(props) {
                         {/* 友链列表 */}
                         <div className="text-left">
                             <div className="z-2 mt-2 grid grid-cols-1 gap-4 w-full lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 xl:grid-cols-3">
+                                <a target="_blank" className="border-1 rounded-lg ring-inset ring-2 ring-[rgba(0,0,0,0)] hover:ring-violet-400 transition-transform-colors hover:shadow-sm p-2 flex items-center gap-2 backdrop-blur-sm overflow-hidden cursor-pointer">
+                                    <span className="w-16 h-16">
+                                        <img className="rounded-full" src="http://113.45.148.40:3000/images/logo/logo.png" alt="headimg" />
+                                    </span>
+                                    <span className="flex flex-col">
+                                        <span className="text-inherit text-xl font-medium">
+                                            丁烷
+                                        </span>
+                                        <span className=" text-slate-600">
+                                            我是一个简介。
+                                        </span>
+                                    </span>
+                                </a>
+
                                 <a target="_blank" className="border-1 rounded-lg ring-inset ring-2 ring-[rgba(0,0,0,0)] hover:ring-violet-400 transition-transform-colors hover:shadow-sm p-2 flex items-center gap-2 backdrop-blur-sm overflow-hidden cursor-pointer">
                                     <span className="w-16 h-16">
                                         <img className="rounded-full" src="http://113.45.148.40:3000/images/logo/logo.png" alt="headimg" />

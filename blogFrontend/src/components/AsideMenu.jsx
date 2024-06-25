@@ -18,15 +18,17 @@ export default function AsideMenu() {
     const [show, setShow] = useState(false)
 
     return (
-        <Dropdown backdrop="blur" key={show}>
+        <Dropdown key={show}>
             <DropdownTrigger>
                 <span variant="bordered" children={<MenuSwitch></MenuSwitch>}>
                 </span>
             </DropdownTrigger>
             <DropdownMenu variant="faded" aria-label="Static Actions" items={items} className="space-y-6"
                 children={(item) => (
-                    <DropdownItem key={item.key} textValue={item.label} onClick={() => { setShow(!show) }}>
-                        <Link className="text-lg font-semibold" to={item.to}>{item.label}</Link>
+                    <DropdownItem key={item.key} textValue={item.label} onClick={() => { setShow(p => !show) }}>
+                        <Link className="text-lg font-semibold" to={item.to}>
+                            {item.label}
+                        </Link>
                     </DropdownItem>
                 )}
             >

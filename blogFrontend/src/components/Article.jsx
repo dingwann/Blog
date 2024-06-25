@@ -16,6 +16,7 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import http from './Axiosconfig'
 import formatDate, { weekDay } from "./FormatDate";
 
+
 const plugins = [
     gfm(), // GFM
     highlight(), // 代码高亮
@@ -40,6 +41,7 @@ export default function Article(props) {
             // console.log(res)
             if (res.data.code === 1) {
                 setArticle(res.data.data)
+                console.log(res.data.data)
             } else {
                 toast(`😢 ${res.data.msg}`, {
                     position: "top-center",
@@ -56,7 +58,6 @@ export default function Article(props) {
 
         getArticle()
     }, [aid])
-
 
     return (
         <>
@@ -119,8 +120,9 @@ export default function Article(props) {
                 >
                     <span className="h-auto flex flex-col gap-4">
                         <p>目录</p>
-                        <span>
-                            目录内容
+                        <hr />
+                        <span className="flex">
+
                         </span>
                     </span>
                 </div>

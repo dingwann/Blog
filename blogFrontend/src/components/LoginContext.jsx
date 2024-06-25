@@ -11,6 +11,10 @@ export const LoginProvider = ({ children }) => {
         return localData ? JSON.parse(localData) : true;
     });
 
+    useLayoutEffect(() => {
+        window.localStorage.setItem('themeState', JSON.stringify(themestate));
+    }, [themestate]);
+
     // 登录状态
     const [LoginState, setLoginState] = useState(() => {
         const localData = window.localStorage.getItem('LoginState');

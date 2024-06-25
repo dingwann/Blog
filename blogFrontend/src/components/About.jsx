@@ -4,7 +4,7 @@ import './AboutFoot'
 import AboutFoot from "./AboutFoot"
 import { LoginContext } from '../components/LoginContext';
 import { ToastContainer, toast } from 'react-toastify';
-
+import { Helmet } from 'react-helmet';
 
 
 export default function About(props) {
@@ -63,6 +63,9 @@ export default function About(props) {
 
     return (
         <>
+            <Helmet>
+                <title>关于我 - Ding Wan</title>
+            </Helmet>
             <div className="px-4 w-full relative">
                 <ToastContainer limit={4} />
                 <Login></Login>
